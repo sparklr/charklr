@@ -32,6 +32,11 @@ http.createServer(function (req, res) {
 		});
 		return;	
 	}
+	else if(requesturi.pathname == '/api/delete'){
+		database.query("DELETE FROM timeline WHERE id = '" + parseInt(requesturi.query.id) + "'", function(err, rows){
+			res.end(200);
+		});
+	}
 
 	console.log("requesting: " + requesturi.pathname);
 

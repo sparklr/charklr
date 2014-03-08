@@ -22,7 +22,7 @@ function hashChange(){
 				else if(data == 'posts')
 					tr = r.from + td + r.message + td;
 
-				html += '<tr><td>' + r.id + td + tr + 'x</td></tr>';
+				html += '<tr id="post_' + r.id + '"><td>' + r.id + td + tr + '<div onclick="deletePost(' + r.id + ')">x</div></td></tr>';
 			}
 			html += '</table>';
 
@@ -32,6 +32,21 @@ function hashChange(){
 
 	xhr.open("GET", '/api/' + data);
 	xhr.send(null);
+}
+
+function deletePost(id){
+	var xhr = new XMLHttpRequest();
+	
+	if(confirm("Are you sure?????????????????")){
+		xhr.onreadystatechange = function(){
+			if(xhr.readyState == 4){
+				document.getElementById('post_' + id).innerHTML = '';
+			}
+		}
+
+		xhr.open("GET", '/api/delete?id=' + id);
+		xhr.send(null);
+	}
 }
 
 window.addEventListener('load', hashChange);
