@@ -13,7 +13,7 @@ exports.init = function() {
 	connection.connectSync(config.database.host, config.database.user, config.database.password, config.database.database);
 
 	if(!connection.connectedSync()){
-		console.log("errr");
+		console.log("Problem connecting to database...");
 		setTimeout(exports.init, 1000);
 	}
 	isConnecting = false;
