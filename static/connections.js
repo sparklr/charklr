@@ -24,7 +24,7 @@ function hashChange(){
 function deletePost(id){
 	var xhr = new XMLHttpRequest();
 	
-	if(confirm("Are you sure?????????????????")){
+	if(confirm("Are you sure you want to delete this post?")){
 		xhr.onreadystatechange = function(){
 			if(xhr.readyState == 4){
 				document.getElementById('post_' + id).innerHTML = '';
@@ -36,11 +36,11 @@ function deletePost(id){
 	}
 }
 
-function banUser(id){
+function banUser(id, user){
 	var xhr = new XMLHttpRequest();
 	var ban = document.getElementById('ban_' + id).innerHTML;
 
-	if(confirm((ban == 'x') ? "Are you sure you want to ban this user?" : "Are you sure you want to unban this user?")){
+	if(confirm((ban == 'x') ? "Are you sure you want to ban " + user + "?" : "Are you sure you want to unban " + user + "?")){
 		xhr.onreadystatechange = function(){
 			if(xhr.readyState == 4){
 				if(ban == 'x')
@@ -55,11 +55,11 @@ function banUser(id){
 	xhr.send(null);
 }
 
-function muteUser(id){
+function muteUser(id, user){
 	var xhr = new XMLHttpRequest();
 	var mute = document.getElementById('mute_' + id).innerHTML;
 
-	if(confirm((mute == 'x') ? "Are you sure you want to mute this user?" : "Are you sure you want to unmute this user?")){
+	if(confirm((mute == 'x') ? "Are you sure you want to mute " + user + "?" : "Are you sure you want to unmute " + user + "?")){
 		xhr.onreadystatechange = function(){
 			if(xhr.readyState == 4){
 				if(mute == 'x')
