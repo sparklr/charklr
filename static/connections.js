@@ -55,5 +55,24 @@ function banUser(id){
 	xhr.send(null);
 }
 
+function muteUser(id){
+	var xhr = new XMLHttpRequest();
+	var mute = document.getElementById('mute_' + id).innerHTML;
+
+	if(confirm((mute == 'x') ? "Are you sure you want to mute this user?" : "Are you sure you want to unmute this user?")){
+		xhr.onreadystatechange = function(){
+			if(xhr.readyState == 4){
+				if(mute == 'x')
+					document.getElementById('mute_' + id).innerHTML = 'un';
+				else
+					document.getElementById('mute_' + id).innerHTML = 'x';
+			}
+		}
+	}
+
+	xhr.open("GET", (mute == 'x') ? '/api/mute?id=' + id : '/api/unmute?id=' + id);
+	xhr.send(null);
+}
+
 window.addEventListener('load', hashChange);
 window.addEventListener('hashchange', hashChange);

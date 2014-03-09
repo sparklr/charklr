@@ -19,7 +19,7 @@ http.createServer(function (req, res) {
 	res.writeHead(200, {'Content-Type': 'text/html'});
 
 	if(requesturi.pathname == '/api/users'){
-		database.query("SELECT id, username, displayname, email, rank FROM users", function(err, rows){
+		database.query("SELECT id, username, displayname, email, rank, mutetime FROM users", function(err, rows){
 			res.write(JSON.stringify(rows));
 			res.end();
 		});
@@ -47,7 +47,17 @@ http.createServer(function (req, res) {
 			res.end(200);
 		});
 	}
-
+	else if(requesturi.pathname == '/api/mute'){
+		console.log((new Date).getTime());
+		database.query("UPDATE users SET mutetime = '" + (new Date).getTime() / 1000 + "' WHERE id = '" + parseInt(requesturi.query.id) + "'", function(err, rows){
+			res.end(200);
+		});
+	}
+	else if(requesturi.pathname == '/api/unmute'){
+		database.query("UPDATE users SET mutetime = '0' WHERE id = '" + parseInt(requesturi.query.id) + "'", function(err, rows){
+			res.end(200);
+		});
+	}
 
 	console.log("requesting: " + requesturi.pathname);
 

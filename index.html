@@ -28,7 +28,7 @@
 					<td>{{=users.username}}</td>
 					<td>{{=users.displayname}}</td>
 					<td>{{=users.email}}</td>
-					<td><a href=''>x</a></td>
+					<td><a id='mute_{{=users.id}}' href='javascript:muteUser({{=users.id}})'>{{? users.mutetime > 0 }}un{{??}}x{{?}}</a></td>
 					<td><a id='ban_{{=users.id}}' href='javascript:banUser({{=users.id}})'>{{? users.rank >= 0 }}x{{?? users.rank == -1 }}un{{?}}</a></td>
 				</tr>
 				{{~}}
