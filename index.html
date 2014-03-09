@@ -5,6 +5,7 @@
 	<title>charklr*</title>
 	<link rel='stylesheet' href='{STATIC}style.css'>
 	<script src='{STATIC}connections.js'></script>
+	<script src='{STATIC}doT.min.js'></script>
 </head>
 
 <body>
@@ -14,8 +15,48 @@
 		<a href='#!/posts'>Posts</a>
 	</div>
 
-	<div id='content'>
-	</div>
+	<div id='content'></div>
+	<script id='template_users' type='text/template'>
+		<table>
+			<thead>
+				<tr><th>ID</th><th>Username</th><th>Displayname</th><th>Email</th><th>Mute</th><th>Ban</th></tr>
+			</thead>
+			<tbody>
+				{{~it :users:index}}
+				<tr id='user_{{=users.id}}'>
+					<td>{{=users.id}}</td>
+					<td>{{=users.username}}</td>
+					<td>{{=users.displayname}}</td>
+					<td>{{=users.email}}</td>
+					<td><a href=''>x</a></td>
+					<td><a id='ban_{{=users.id}}' href='javascript:banUser({{=users.id}})'>{{? users.rank >= 0 }}x{{?? users.rank == -1 }}un{{?}}</a></td>
+				</tr>
+				{{~}}
+			</tbody>
+		</table>
+	</script>
+	<script id='template_posts' type='text/template'>
+		<table>
+			<thead>
+				<tr><th>ID</th><th>User</th><th>Post</th><th>Delete</th></tr>
+			</thead>
+			<tbody>
+				{{~it :post:index}}
+				<tr id='post_{{=post.id}}'>
+					<td>{{=post.id}}</td>
+					<td>{{=post.from}}</td>
+					<td>{{=post.message}}</td>
+					<td><a href='javascript:deletePost({{=post.id}})'>x</a></td>
+				</tr>
+				{{~}}
+			</tbody>
+		</table>
+	</script>
+
+<script type='text/javascript'>
+	initTemplates();
+</script>
+
 </body>
 
 </html>
